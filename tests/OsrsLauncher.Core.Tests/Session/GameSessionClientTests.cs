@@ -20,6 +20,7 @@ public class GameSessionClientTests
 
         Assert.Equal("SESS-1", session.SessionId);
         Assert.Contains("the-id-token", handler.LastRequestBody);
+        Assert.Contains("\"idToken\"", handler.LastRequestBody);
     }
 
     [Fact]
