@@ -406,10 +406,78 @@ public partial class MainWindow : Window
             return;
         }
 
-        var character = characters[0];
-        if (characters.Count > 1)
+        // ── Character selection ────────────────────────────────────────────
+        // Program.Args[0], if present, is either a display name (case-insensitive)
+        // or a 0-based numeric index.
+        var selectorArg = Program.Args.Length > 0 ? Program.Args[0] : null;
+        JagexCharacter character;
+        int selectedIndex;
+
+        if (selectorArg is not null)
         {
-            Console.WriteLine($"[HARNESS] multiple characters ({characters.Count}) — picking first for this harness; selection UI is future work.");
+            // Try numeric index first
+            if (int.TryParse(selectorArg, out var idx) && idx >= 0 && idx < characters.Count)
+            {
+                selectedIndex = idx;
+                character = characters[selectedIndex];
+            }
+            else
+            {
+                // Try display-name match (case-insensitive)
+                selectedIndex = -1;
+                for (var i = 0; i < characters.Count; i++)
+                {
+                    if (string.Equals(characters[i].DisplayName, selectorArg, StringComparison.OrdinalIgnoreCase))
+                    {
+                        selectedIndex = i;
+                        break;
+                    }
+                }
+
+                if (selectedIndex < 0)
+                {
+                    var available = string.Join(", ", characters.Select((c, i) =>
+                        $"{i}:{c.DisplayName ?? "(no name)"}"));
+                    Console.WriteLine($"[HARNESS][ERROR] no account matches '{selectorArg}'. Available: [{available}]");
+                    return;
+                }
+
+                character = characters[selectedIndex];
+            }
+        }
+        else
+        {
+            // No arg given — pick first account with a non-null, non-empty DisplayName;
+            // fall back to index 0 if none have a display name.
+            selectedIndex = -1;
+            for (var i = 0; i < characters.Count; i++)
+            {
+                if (!string.IsNullOrEmpty(characters[i].DisplayName))
+                {
+                    selectedIndex = i;
+                    break;
+                }
+            }
+
+            if (selectedIndex < 0)
+            {
+                selectedIndex = 0;
+                Console.WriteLine("[HARNESS] no named character found — falling back to index 0.");
+            }
+
+            character = characters[selectedIndex];
+        }
+
+        Console.WriteLine($"[8b] selected character: index={selectedIndex} displayName={character.DisplayName ?? "(none)"} accountId len={character.AccountId.Length}");
+
+        // If no arg was passed and more than one named character exists, hint at re-run syntax.
+        if (selectorArg is null)
+        {
+            var namedCount = characters.Count(c => !string.IsNullOrEmpty(c.DisplayName));
+            if (namedCount > 1)
+            {
+                Console.WriteLine($"[HARNESS] to choose a different character, re-run with: dotnet run --project src/OsrsLauncher.Harness -- \"<DisplayName>\"");
+            }
         }
 
         // Resolve RuneLite path and launch
