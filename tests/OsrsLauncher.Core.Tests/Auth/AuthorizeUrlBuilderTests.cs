@@ -25,5 +25,8 @@ public class AuthorizeUrlBuilderTests
         Assert.Contains("code_challenge_method=S256", url);
         Assert.Contains("state=STATE", url);
         Assert.Contains("scope=openid%20offline", url);
+        Assert.Contains("nonce=NONCE", url);
+        Assert.Contains("prompt=login", url);
+        Assert.Contains("redirect_uri=https%3A%2F%2Fexample.test%2Fcallback", url);
     }
 }
