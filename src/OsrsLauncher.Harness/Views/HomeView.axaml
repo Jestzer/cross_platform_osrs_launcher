@@ -25,12 +25,14 @@
                 <!-- Primary action: Play or Log in -->
                 <Button x:Name="PrimaryButton"
                         HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
                         MinWidth="120"
                         Padding="24,10"
                         FontSize="15"
                         FontWeight="SemiBold"
                         Background="{DynamicResource AccentBrush}"
-                        Foreground="White"
+                        Foreground="{DynamicResource AccentForegroundBrush}"
                         Click="OnPrimaryButtonClick" />
 
                 <!-- Switch character (secondary) -->
