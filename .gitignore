@@ -11,6 +11,12 @@ publish/
 *.pkg
 *.nupkg
 
+# macOS packaging build artifacts
+dist/
+build/
+*.icns
+*.iconset/
+
 # IDE / editor
 .vs/
 .idea/
