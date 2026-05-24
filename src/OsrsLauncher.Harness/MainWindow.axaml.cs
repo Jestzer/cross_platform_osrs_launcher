@@ -10,6 +10,7 @@ using Avalonia.Controls;
 using Avalonia.Threading;
 using OsrsLauncher.Core.Auth;
 using OsrsLauncher.Core.Launch;
+using OsrsLauncher.Core.Persistence;
 using OsrsLauncher.Core.Session;
 
 namespace OsrsLauncher.Harness;
@@ -494,10 +495,14 @@ public partial class MainWindow : Window
 
         Console.WriteLine($"[9] launching RuneLite at {runelitePath}");
 
-        var inputs = new RuneLiteLaunchInputs(session, character, _leg1Tokens!);
+        // Persist session to Keychain so the next run can skip the WebView login.
+        new KeychainCredentialStore().Save(
+            new StoredSession(session.SessionId, character.AccountId, character.DisplayName));
+        Console.WriteLine("[persist] session saved to Keychain for fast relaunch.");
+
         try
         {
-            _launcher.Launch(inputs, overridePath: null);
+            _launcher.LaunchJagexSession(session, character);
             Console.WriteLine("[HARNESS] RuneLite launch invoked. Done.");
         }
         catch (Exception ex)
