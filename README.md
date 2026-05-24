@@ -48,4 +48,8 @@ flow:
 ## Disclaimer
 
 Unofficial. Not affiliated with or endorsed by Jagex or RuneLite. For personal
-use. A `LICENSE` has not been chosen yet.
+use.
+
+## License
+
+Licensed under the [GNU General Public License v3.0](LICENSE).
