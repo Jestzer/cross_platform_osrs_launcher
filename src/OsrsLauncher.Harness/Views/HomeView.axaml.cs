@@ -56,7 +56,7 @@ public partial class HomeView : UserControl
                 _vm.Play();
                 inlineStatus.IsVisible = true;
                 inlineStatus.Foreground = Avalonia.Media.Brushes.Green;
-                inlineStatus.Text = "Launched — you can close this window.";
+                inlineStatus.Text = "Launched - you can close this window.";
             }
             catch (RuneLiteNotFoundException ex)
             {
