@@ -939,6 +939,16 @@ git commit -m "feat: add RuneLiteLauncher with JX_ env construction and path res
 
 ## Task 8: Console harness — first authenticated launch (milestone)
 
+> **STATUS — 2026-05-24: ✅ DONE, implemented differently than written below.** The
+> console + system-browser approach below does NOT work for the real flow: the Jagex login
+> is **two OAuth legs**, and leg 2 is implicit (`id_token` returned in the URL `#fragment`,
+> which a localhost/console catcher cannot read) and depends on leg-1 session cookies. It was
+> implemented instead as a **WebView-driven two-leg harness** (`src/OsrsLauncher.Harness`,
+> Avalonia + `NativeWebView`) reusing the Core library. Verified end-to-end on Apple Silicon:
+> real Jagex login → game session → character selection → RuneLite logs into the game world.
+> Key fix: emit only the three Jagex `JX_*` vars (see `docs/reference/jagex-flow.md` §5). The
+> steps below are retained for historical context.
+
 **Purpose:** wire the core into a real login using the **system browser** (avoids the WebView dependency for this milestone), confirm the Task 2 constants live, and achieve the first authenticated RuneLite launch. This is the Phase 1 milestone.
 
 **Files:**

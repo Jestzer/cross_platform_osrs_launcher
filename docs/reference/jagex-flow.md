@@ -349,12 +349,25 @@ Source: [runelite] `runelite-client/src/main/java/net/runelite/client/TelemetryC
 > `JX_REFRESH_TOKEN`. **All five names are confirmed exactly.** No additional JX_
 > variables were found in either reference repo.
 
+> **✅ VERIFIED LIVE (2026-05-24):** Setting EXACTLY these three vars — `JX_SESSION_ID`,
+> `JX_CHARACTER_ID`, `JX_DISPLAY_NAME` — logs into the OSRS game world successfully.
+> **Critical gotcha:** ALSO setting `JX_ACCESS_TOKEN`/`JX_REFRESH_TOKEN` (the legacy-RS
+> path vars) alongside the session makes the client reject the login with the generic
+> *"Failed to login. Please try again."* — RuneLite takes the wrong login branch. For a
+> Jagex account, emit ONLY the three session vars.
+
 ---
 
 ## 6. Summary of UNVERIFIED Items
 
-The following items could not be fully confirmed from static analysis alone and must
-be validated in **Task 8 (live login)**:
+**✅ All resolved by a successful live login on 2026-05-24 (Task 8):**
+- **redirect_uri** `https://secure.runescape.com/m=weblogin/launcher-redirect` is **required** and works (the leg-1 `code` is captured at it).
+- **PKCE (S256)** is **used and accepted** by the server.
+- **displayName** is **optional** (one account returned none; default to empty string).
+- **userHash** is not needed (ignored harmlessly by the C# deserializer).
+- **Consent leg** (`http://localhost`, `response_type=id_token code`, scope `openid offline`, no `id_token_hint`) works; the `id_token` arrives in the URL **fragment** and is used directly to create the game session.
+
+The original (now-resolved) notes follow for reference:
 
 1. **redirect_uri** — Whether `https://secure.runescape.com/m=weblogin/launcher-redirect`
    is required by the Jagex authorization server, or whether it can be omitted.
