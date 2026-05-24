@@ -93,4 +93,20 @@ public class HomeViewModelTests
         var vm = Make(new InMemoryCredentialStore(), out _);
         Assert.Throws<InvalidOperationException>(() => vm.Play());
     }
+
+    [Fact]
+    public void IsLoggedIn_FalseForOldFormatBlob_DoesNotThrow()
+    {
+        // Old Phase-2 format: {sessionId, accountId, displayName} — no "characters" array.
+        var old = OsrsLauncher.Core.Persistence.StoredSessionSerializer.Deserialize(
+            """{"sessionId":"SESS-1","accountId":"ACC-1","displayName":"Jestzer"}""");
+        Assert.NotNull(old);
+        var store = new OsrsLauncher.Core.Persistence.InMemoryCredentialStore();
+        store.Save(old!);
+        var vm = Make(store, out _);
+
+        Assert.False(vm.IsLoggedIn);     // must not throw
+        Assert.Null(vm.CharacterName);
+        Assert.Empty(vm.Characters);
+    }
 }

@@ -23,7 +23,7 @@ public sealed class HomeViewModel
         get
         {
             var s = Session;
-            return s?.Characters.FirstOrDefault(c => c.AccountId == s.SelectedAccountId);
+            return s?.Characters?.FirstOrDefault(c => c.AccountId == s.SelectedAccountId);
         }
     }
 
@@ -35,7 +35,7 @@ public sealed class HomeViewModel
     public void SelectCharacter(string accountId)
     {
         var s = Session ?? throw new InvalidOperationException("No stored session.");
-        if (s.Characters.All(c => c.AccountId != accountId))
+        if (s.Characters is null || s.Characters.All(c => c.AccountId != accountId))
             throw new ArgumentException($"Unknown character: {accountId}");
         _store.Save(s with { SelectedAccountId = accountId });
     }
