@@ -1,0 +1,33 @@
+# .NET build output
+[Bb]in/
+[Oo]bj/
+publish/
+[Dd]ebug/
+[Rr]elease/
+
+# Packaged app bundles / installers
+*.app/
+*.dmg
+*.pkg
+*.nupkg
+
+# IDE / editor
+.vs/
+.idea/
+*.user
+*.suo
+*.DotSettings.user
+
+# NuGet
+project.lock.json
+.nuget/
+
+# macOS
+.DS_Store
+
+# Logs / misc
+*.log
+
+# Local secrets — never commit credentials or tokens
+*.secret
+credentials.properties
