@@ -25,21 +25,24 @@ public partial class HomeView : UserControl
 
     private void Render()
     {
-        var statusLabel  = this.FindControl<TextBlock>("StatusLabel")!;
-        var primaryBtn   = this.FindControl<Button>("PrimaryButton")!;
-        var switchBtn    = this.FindControl<Button>("SwitchButton")!;
+        var statusLabel         = this.FindControl<TextBlock>("StatusLabel")!;
+        var primaryBtn          = this.FindControl<Button>("PrimaryButton")!;
+        var switchCharacterBtn  = this.FindControl<Button>("SwitchCharacterButton")!;
+        var switchBtn           = this.FindControl<Button>("SwitchButton")!;
 
         if (_vm.IsLoggedIn)
         {
-            statusLabel.Text    = $"Ready to play as {_vm.CharacterName}";
-            primaryBtn.Content  = "Play";
-            switchBtn.IsVisible = true;
+            statusLabel.Text           = $"Ready to play as {_vm.CharacterName}";
+            primaryBtn.Content         = "Play";
+            switchCharacterBtn.IsVisible = _vm.CanSwitchCharacter;
+            switchBtn.IsVisible        = true;
         }
         else
         {
-            statusLabel.Text    = "Not logged in";
-            primaryBtn.Content  = "Log in";
-            switchBtn.IsVisible = false;
+            statusLabel.Text           = "Not logged in";
+            primaryBtn.Content         = "Log in";
+            switchCharacterBtn.IsVisible = false;
+            switchBtn.IsVisible        = false;
         }
     }
 
@@ -73,6 +76,9 @@ public partial class HomeView : UserControl
             _owner.ShowLogin();
         }
     }
+
+    private void OnSwitchCharacterButtonClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        => _owner.ShowStoredCharacterPicker();
 
     private void OnSwitchButtonClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         => _owner.ShowLogin();

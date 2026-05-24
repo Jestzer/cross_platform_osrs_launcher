@@ -11,6 +11,11 @@
                 HorizontalAlignment="Center"
                 MinWidth="120"
                 Click="OnPrimaryButtonClick" />
+        <Button x:Name="SwitchCharacterButton"
+                HorizontalAlignment="Center"
+                MinWidth="120"
+                IsVisible="False"
+                Click="OnSwitchCharacterButtonClick">Switch character</Button>
         <Button x:Name="SwitchButton"
                 HorizontalAlignment="Center"
                 MinWidth="120"

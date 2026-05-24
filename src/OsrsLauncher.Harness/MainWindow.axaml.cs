@@ -36,7 +36,7 @@ public partial class MainWindow : Window
         Root.Content = view;
     }
 
-    /// <summary>Navigate to the login WebView.</summary>
+    /// <summary>Navigate to the login WebView (full re-login / switch account).</summary>
     public void ShowLogin()
     {
         var loginView = new LoginView();
@@ -54,14 +54,28 @@ public partial class MainWindow : Window
         Root.Content = loginView;
     }
 
-    /// <summary>Navigate to the character picker, then persist + return home on selection.</summary>
+    /// <summary>Navigate to the character picker, then persist the FULL list + return home on selection.</summary>
     public void ShowPicker(GameSession session, IReadOnlyList<JagexCharacter> accounts)
     {
         var selectable = CharacterFilter.Selectable(accounts);
 
         Root.Content = new CharacterPickerView(selectable, chosen =>
         {
-            _store.Save(new StoredSession(session.SessionId, chosen.AccountId, chosen.DisplayName));
+            _store.Save(new StoredSession(session.SessionId, selectable, chosen.AccountId));
+            Dispatcher.UIThread.Post(() => ShowHome());
+        });
+    }
+
+    /// <summary>
+    /// Show the character picker built from the stored session — no re-login required.
+    /// Selecting a character updates SelectedAccountId in the stored session and returns home.
+    /// </summary>
+    public void ShowStoredCharacterPicker()
+    {
+        var vm = new HomeViewModel(_store, _launcher);
+        Root.Content = new CharacterPickerView(vm.Characters, chosen =>
+        {
+            vm.SelectCharacter(chosen.AccountId);
             Dispatcher.UIThread.Post(() => ShowHome());
         });
     }
