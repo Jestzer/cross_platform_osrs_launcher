@@ -44,6 +44,7 @@ public class OAuthClientTests
         Assert.Equal("AT2", tokens.AccessToken);
         Assert.Contains("grant_type=refresh_token", handler.LastRequestBody);
         Assert.Contains("refresh_token=old-refresh", handler.LastRequestBody);
+        Assert.Contains("client_id=test-client", handler.LastRequestBody);
     }
 
     [Fact]
