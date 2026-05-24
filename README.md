@@ -1,19 +1,15 @@
 # cross_platform_osrs_launcher
 
-A native desktop launcher that logs into a **Jagex account** and starts
-**RuneLite** with the session credentials it needs — without the official Jagex
-Launcher.
+A native desktop launcher that logs into a Jagex account and starts
+RuneLite with the session credentials it needs, without the official Jagex
+Launcher. Cross-platform compatibility and simplicity should allow for (hopefully) easier future-proofing and cross-platform support.
 
 ## Why
 
-The Jagex Launcher is the supported way to obtain Jagex-account login
-credentials for Old School RuneScape / RuneLite, but on macOS it ships only as
-an **Intel binary (Rosetta 2)**. This project is a **native Apple Silicon**
-alternative for that one job: do the Jagex OAuth login, get a game session, and
-launch RuneLite with the `JX_*` environment variables it reads.
+Jagex has failed to offer support for Apple Silicon (M-series CPUs) and Linux users. Bolt (I believe) meets the needs of Linux users, but it currently has no Mac support. With Rosetta 2, Apple Silicon  
 
-Built with **C# / .NET + Avalonia 12**, so it is cross-platform-capable. macOS /
-Apple Silicon is the only build-and-test target for v1.
+This is built with Avalonia, so it is cross-platform-capable. macOS /
+Apple Silicon is the only build-and-test target for now, though.
 
 ## Status
 
@@ -27,7 +23,6 @@ Apple Silicon is the only build-and-test target for v1.
 - ✅ Launch RuneLite with `JX_*` credentials
 - ✅ Optional one-click relaunch (refresh token stored in the OS keychain)
 - ❌ No RS3, official-client launching, game downloads/updates, or plugins
-  (that is [Bolt](https://github.com/Adamcake/Bolt)'s territory)
 
 ## Security
 
@@ -47,8 +42,7 @@ flow:
 
 ## Disclaimer
 
-Unofficial. Not affiliated with or endorsed by Jagex or RuneLite. For personal
-use.
+This is completely unofficial and not affiliated with or endorsed by Jagex or RuneLite in any way shape or form.
 
 ## License
 
