@@ -61,4 +61,17 @@ public class RuneLiteLauncherTests
         Assert.Equal("/custom/RuneLite", runner.StartedPath);
         Assert.Equal("SESS-1", runner.Env!["JX_SESSION_ID"]);
     }
+
+    [Fact]
+    public void BuildEnvironment_DefaultsMissingDisplayNameToEmpty()
+    {
+        var inputs = new RuneLiteLaunchInputs(
+            new GameSession("SESS-1"),
+            new JagexCharacter("ACC-1", null),
+            new OAuthTokens("AT", "RT", "IT", 3600));
+
+        var env = RuneLiteLauncher.BuildEnvironment(inputs);
+
+        Assert.Equal("", env["JX_DISPLAY_NAME"]);
+    }
 }

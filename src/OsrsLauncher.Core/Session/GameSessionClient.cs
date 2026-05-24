@@ -51,5 +51,5 @@ public sealed class GameSessionClient
 
     private sealed record AccountResponse(
         [property: JsonPropertyName("accountId")] string AccountId,
-        [property: JsonPropertyName("displayName")] string DisplayName);
+        [property: JsonPropertyName("displayName")] string? DisplayName);
 }

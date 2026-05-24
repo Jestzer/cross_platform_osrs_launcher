@@ -28,7 +28,7 @@ public sealed class RuneLiteLauncher
     {
         ["JX_SESSION_ID"] = input.Session.SessionId,
         ["JX_CHARACTER_ID"] = input.Character.AccountId,
-        ["JX_DISPLAY_NAME"] = input.Character.DisplayName,
+        ["JX_DISPLAY_NAME"] = input.Character.DisplayName ?? "",
         ["JX_ACCESS_TOKEN"] = input.Tokens.AccessToken,
         ["JX_REFRESH_TOKEN"] = input.Tokens.RefreshToken ?? "",
     };

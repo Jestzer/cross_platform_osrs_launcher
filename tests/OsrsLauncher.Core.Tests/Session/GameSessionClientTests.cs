@@ -36,4 +36,16 @@ public class GameSessionClientTests
         Assert.Equal("Zezima", chars[0].DisplayName);
         Assert.Equal("Bearer SESS-1", handler.LastRequest!.Headers.Authorization!.ToString());
     }
+
+    [Fact]
+    public async Task ListCharactersAsync_ToleratesMissingDisplayName()
+    {
+        var handler = StubHttpMessageHandler.Json("""[{"accountId":"ACC-1"}]""");
+        var client = new GameSessionClient(new HttpClient(handler), Config);
+
+        var chars = await client.ListCharactersAsync(new GameSession("SESS-1"));
+
+        Assert.Single(chars);
+        Assert.Null(chars[0].DisplayName);
+    }
 }
