@@ -6,10 +6,9 @@ Launcher. Cross-platform compatibility and simplicity should allow for (hopefull
 
 ## Why
 
-Jagex has failed to offer support for Apple Silicon (M-series CPUs) and Linux users. Bolt (I believe) meets the needs of Linux users, but it currently has no Mac support. With Rosetta 2, Apple Silicon  
+Jagex has failed to offer support for Apple Silicon (M-series CPUs) and Linux users. Bolt (I believe) meets the needs of Linux users, but it currently has no Mac support. With Rosetta 2 being removed soon by Apple, Apple Silicon users are potentionally left in the dust and have no easy way of playing OSRS with a Jagex account, until now!
 
-This is built with Avalonia, so it is cross-platform-capable. macOS /
-Apple Silicon is the only build-and-test target for now, though.
+This is built with Avalonia, so it is cross-platform-capable. Apple Silicon is the only build-and-test target for now, though.
 
 ## Status
 
