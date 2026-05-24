@@ -2,16 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="OsrsLauncher.Harness.Views.HomeView"
              Background="{DynamicResource MainBackgroundBrush}">
-    <Panel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="0">
         <!-- Centered card -->
         <Border HorizontalAlignment="Center"
-                VerticalAlignment="Center"
                 Background="{DynamicResource SidebarBackgroundBrush}"
                 BorderBrush="{DynamicResource SeparatorBrush}"
                 BorderThickness="1"
                 CornerRadius="6"
                 Padding="24"
-                MinWidth="320">
+                MinWidth="320"
+                Margin="20,20,20,8">
             <StackPanel Spacing="16">
                 <!-- Character / login heading -->
                 <TextBlock x:Name="StatusLabel"
@@ -65,5 +65,12 @@
                            IsVisible="False" />
             </StackPanel>
         </Border>
-    </Panel>
+
+        <!-- Version label — reads assembly version at runtime, set from code-behind -->
+        <TextBlock x:Name="VersionLabel"
+                   FontSize="11"
+                   Foreground="{DynamicResource TextSecondaryBrush}"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,12" />
+    </StackPanel>
 </UserControl>

@@ -1,0 +1,49 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#342D23"/>
+      <stop offset="1" stop-color="#1E1A14"/>
+    </linearGradient>
+    <radialGradient id="shield" cx="0.5" cy="0.40" r="0.75">
+      <stop offset="0" stop-color="#4C4030"/>
+      <stop offset="1" stop-color="#2C2418"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F0D070"/>
+      <stop offset="0.5" stop-color="#CBA135"/>
+      <stop offset="1" stop-color="#8C6B1C"/>
+    </linearGradient>
+    <linearGradient id="blade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9A8650"/>
+      <stop offset="0.5" stop-color="#F5ECC8"/>
+      <stop offset="1" stop-color="#9A8650"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- squircle background -->
+  <rect x="0" y="0" width="1024" height="1024" rx="232" ry="232" fill="url(#bg)"/>
+  <rect x="14" y="14" width="996" height="996" rx="220" ry="220" fill="none" stroke="#5A4E3A" stroke-width="6" opacity="0.6"/>
+
+  <!-- heater shield -->
+  <g filter="url(#shadow)">
+    <path d="M512 236 L772 312 Q772 612 512 792 Q252 612 252 312 Z"
+          fill="url(#shield)" stroke="url(#gold)" stroke-width="30" stroke-linejoin="round"/>
+    <path d="M512 236 L512 792" stroke="#000000" stroke-width="6" opacity="0.18"/>
+  </g>
+
+  <!-- upright sword over the shield -->
+  <g filter="url(#shadow)">
+    <!-- blade -->
+    <path d="M512 168 L548 256 L536 612 L512 648 L488 612 L476 256 Z"
+          fill="url(#blade)" stroke="#6E5A22" stroke-width="5" stroke-linejoin="round"/>
+    <!-- crossguard -->
+    <rect x="378" y="606" width="268" height="44" rx="16" fill="url(#gold)" stroke="#6E5A22" stroke-width="5"/>
+    <!-- grip -->
+    <rect x="492" y="650" width="40" height="118" rx="14" fill="#5A4632" stroke="#33271A" stroke-width="5"/>
+    <!-- pommel -->
+    <circle cx="512" cy="788" r="30" fill="url(#gold)" stroke="#6E5A22" stroke-width="5"/>
+  </g>
+</svg>

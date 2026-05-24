@@ -29,6 +29,10 @@ public partial class HomeView : UserControl
         var primaryBtn          = this.FindControl<Button>("PrimaryButton")!;
         var switchCharacterBtn  = this.FindControl<Button>("SwitchCharacterButton")!;
         var switchBtn           = this.FindControl<Button>("SwitchButton")!;
+        var versionLabel        = this.FindControl<TextBlock>("VersionLabel")!;
+
+        var v = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        versionLabel.Text = v is null ? "" : $"v{v.Major}.{v.Minor}.{v.Build}";
 
         if (_vm.IsLoggedIn)
         {
