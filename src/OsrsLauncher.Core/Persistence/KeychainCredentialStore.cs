@@ -17,8 +17,9 @@ public sealed class KeychainCredentialStore : ICredentialStore
     public void Save(StoredSession session)
     {
         var json = StoredSessionSerializer.Serialize(session);
-        // -U updates the item if it already exists.
-        Run(new[] { "add-generic-password", "-s", Service, "-a", Account, "-w", json, "-U" }, out _);
+        // -U updates the item if it already exists; -T trusts the `security` tool to read
+        // it back without a GUI prompt (verified on macOS 26).
+        Run(new[] { "add-generic-password", "-s", Service, "-a", Account, "-w", json, "-U", "-T", "/usr/bin/security" }, out _);
     }
 
     public StoredSession? Load()
