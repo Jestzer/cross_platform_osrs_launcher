@@ -1,23 +1,42 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:session="clr-namespace:OsrsLauncher.Core.Session;assembly=OsrsLauncher.Core"
-             x:Class="OsrsLauncher.Harness.Views.CharacterPickerView">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12">
-        <TextBlock Text="Choose a character:"
-                   FontSize="18"
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,8" />
-        <ItemsControl x:Name="CharacterList">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate x:DataType="session:JagexCharacter">
-                    <Button Content="{Binding DisplayName}"
-                            HorizontalAlignment="Center"
-                            MinWidth="160"
-                            Margin="0,4"
-                            Tag="{Binding}"
-                            Click="OnCharacterButtonClick" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </StackPanel>
+             x:Class="OsrsLauncher.Harness.Views.CharacterPickerView"
+             Background="{DynamicResource MainBackgroundBrush}">
+    <Panel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="{DynamicResource SidebarBackgroundBrush}"
+                BorderBrush="{DynamicResource SeparatorBrush}"
+                BorderThickness="1"
+                CornerRadius="6"
+                Padding="24"
+                MinWidth="320">
+            <StackPanel Spacing="12">
+                <TextBlock Text="Choose a character"
+                           FontSize="20"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource AccentBrushSecondary}"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,8" />
+                <ItemsControl x:Name="CharacterList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="session:JagexCharacter">
+                            <Button Content="{Binding DisplayName}"
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Center"
+                                    MinWidth="260"
+                                    Padding="16,10"
+                                    Margin="0,4"
+                                    Background="{DynamicResource SidebarBlockBrush}"
+                                    Foreground="{DynamicResource TextPrimaryBrush}"
+                                    CornerRadius="4"
+                                    Tag="{Binding}"
+                                    Click="OnCharacterButtonClick" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+    </Panel>
 </UserControl>

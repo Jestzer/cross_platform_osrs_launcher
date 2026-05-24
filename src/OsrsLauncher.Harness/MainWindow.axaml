@@ -1,8 +1,10 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="OsrsLauncher.Harness.MainWindow"
-        Title="OSRS Launcher"
-        Width="1000" Height="750">
+        Title="RuneLite Jagex Launcher"
+        Width="440" Height="560"
+        CanResize="True"
+        Background="{DynamicResource MainBackgroundBrush}">
     <ContentControl x:Name="Root"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
