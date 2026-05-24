@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Avalonia.Threading;
 using OsrsLauncher.Core.Session;
 
 namespace OsrsLauncher.Harness.Views;
@@ -22,13 +21,6 @@ public partial class LoginView : UserControl
         flow.Failed    += msg =>
         {
             Failed?.Invoke(msg);
-            Dispatcher.UIThread.Post(() =>
-            {
-                var label = this.FindControl<TextBlock>("StatusLabel")!;
-                label.IsVisible  = true;
-                label.Foreground = Avalonia.Media.Brushes.Red;
-                label.Text       = msg;
-            });
         };
 
         // Start is called from OnAttachedToVisualTree to ensure the WebView is in the tree.

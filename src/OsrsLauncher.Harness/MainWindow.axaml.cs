@@ -59,6 +59,12 @@ public partial class MainWindow : Window
     {
         var selectable = CharacterFilter.Selectable(accounts);
 
+        if (selectable.Count == 0)
+        {
+            ShowHome("No playable characters were found on this account.");
+            return;
+        }
+
         Root.Content = new CharacterPickerView(selectable, chosen =>
         {
             _store.Save(new StoredSession(session.SessionId, selectable, chosen.AccountId));
