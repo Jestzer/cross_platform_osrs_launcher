@@ -16,12 +16,34 @@ public sealed class HomeViewModel
         _launcher = launcher;
     }
 
-    public bool IsLoggedIn => _store.Load() is not null;
-    public string? CharacterName => _store.Load()?.DisplayName;
+    private StoredSession? Session => _store.Load();
+
+    public JagexCharacter? SelectedCharacter
+    {
+        get
+        {
+            var s = Session;
+            return s?.Characters.FirstOrDefault(c => c.AccountId == s.SelectedAccountId);
+        }
+    }
+
+    public bool IsLoggedIn => SelectedCharacter is not null;
+    public string? CharacterName => SelectedCharacter?.DisplayName;
+    public IReadOnlyList<JagexCharacter> Characters => Session?.Characters ?? Array.Empty<JagexCharacter>();
+    public bool CanSwitchCharacter => Characters.Count > 1;
+
+    public void SelectCharacter(string accountId)
+    {
+        var s = Session ?? throw new InvalidOperationException("No stored session.");
+        if (s.Characters.All(c => c.AccountId != accountId))
+            throw new ArgumentException($"Unknown character: {accountId}");
+        _store.Save(s with { SelectedAccountId = accountId });
+    }
 
     public void Play()
     {
-        var s = _store.Load() ?? throw new InvalidOperationException("No stored session.");
-        _launcher.LaunchJagexSession(new GameSession(s.SessionId), new JagexCharacter(s.AccountId, s.DisplayName));
+        var s = Session ?? throw new InvalidOperationException("No stored session.");
+        var c = SelectedCharacter ?? throw new InvalidOperationException("No character selected.");
+        _launcher.LaunchJagexSession(new GameSession(s.SessionId), c);
     }
 }

@@ -2,6 +2,7 @@
 using OsrsLauncher.Core.App;
 using OsrsLauncher.Core.Launch;
 using OsrsLauncher.Core.Persistence;
+using OsrsLauncher.Core.Session;
 using Xunit;
 
 namespace OsrsLauncher.Core.Tests.App;
@@ -21,39 +22,73 @@ public class HomeViewModelTests
         return new HomeViewModel(store, new RuneLiteLauncher(runner, fileExists: _ => true));
     }
 
+    private static StoredSession TwoCharSession(string selectedAccountId = "ACC-1") =>
+        new StoredSession(
+            "SESS-7",
+            new List<JagexCharacter> { new("ACC-1", "Jestzer"), new("ACC-2", "Hoppity9") },
+            selectedAccountId);
+
     [Fact]
-    public void IsLoggedIn_FalseWhenEmpty()
+    public void EmptyStore_IsNotLoggedIn_AndNoCharacters()
     {
         var vm = Make(new InMemoryCredentialStore(), out _);
         Assert.False(vm.IsLoggedIn);
         Assert.Null(vm.CharacterName);
+        Assert.Empty(vm.Characters);
     }
 
     [Fact]
-    public void IsLoggedIn_TrueWhenSaved_AndExposesName()
+    public void WithSession_SelectingAcc1_IsLoggedIn_ExposesJestzer_CanSwitchIsTrue()
     {
         var store = new InMemoryCredentialStore();
-        store.Save(new StoredSession("SESS-1", "ACC-1", "Jestzer"));
+        store.Save(TwoCharSession("ACC-1"));
         var vm = Make(store, out _);
+
         Assert.True(vm.IsLoggedIn);
         Assert.Equal("Jestzer", vm.CharacterName);
+        Assert.True(vm.CanSwitchCharacter);
+        Assert.Equal(2, vm.Characters.Count);
     }
 
     [Fact]
-    public void Play_LaunchesStoredSession()
+    public void Play_LaunchesSelectedCharacter_Acc1()
     {
         var store = new InMemoryCredentialStore();
-        store.Save(new StoredSession("SESS-7", "ACC-7", "Jestzer"));
+        store.Save(TwoCharSession("ACC-1"));
         var vm = Make(store, out var runner);
 
         vm.Play();
 
         Assert.Equal("SESS-7", runner.Env!["JX_SESSION_ID"]);
-        Assert.Equal("ACC-7", runner.Env!["JX_CHARACTER_ID"]);
+        Assert.Equal("ACC-1", runner.Env!["JX_CHARACTER_ID"]);
     }
 
     [Fact]
-    public void Play_ThrowsWhenNoSession()
+    public void SelectCharacter_ThenPlay_UsesNewSelection()
+    {
+        var store = new InMemoryCredentialStore();
+        store.Save(TwoCharSession("ACC-1"));
+        var vm = Make(store, out var runner);
+
+        vm.SelectCharacter("ACC-2");
+
+        Assert.Equal("Hoppity9", vm.CharacterName);
+        vm.Play();
+        Assert.Equal("ACC-2", runner.Env!["JX_CHARACTER_ID"]);
+    }
+
+    [Fact]
+    public void SelectCharacter_UnknownId_ThrowsArgumentException()
+    {
+        var store = new InMemoryCredentialStore();
+        store.Save(TwoCharSession("ACC-1"));
+        var vm = Make(store, out _);
+
+        Assert.Throws<ArgumentException>(() => vm.SelectCharacter("nope"));
+    }
+
+    [Fact]
+    public void Play_EmptyStore_ThrowsInvalidOperationException()
     {
         var vm = Make(new InMemoryCredentialStore(), out _);
         Assert.Throws<InvalidOperationException>(() => vm.Play());

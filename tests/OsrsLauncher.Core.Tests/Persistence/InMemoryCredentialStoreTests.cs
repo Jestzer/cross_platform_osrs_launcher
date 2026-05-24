@@ -1,11 +1,15 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 using OsrsLauncher.Core.Persistence;
+using OsrsLauncher.Core.Session;
 using Xunit;
 
 namespace OsrsLauncher.Core.Tests.Persistence;
 
 public class InMemoryCredentialStoreTests
 {
+    private static StoredSession MakeSession(string sessionId = "SESS-1", string accountId = "ACC-1") =>
+        new StoredSession(sessionId, new List<JagexCharacter> { new(accountId, "Zezima") }, accountId);
+
     [Fact]
     public void Load_WhenEmpty_ReturnsNull()
     {
@@ -14,10 +18,10 @@ public class InMemoryCredentialStoreTests
     }
 
     [Fact]
-    public void Save_ThenLoad_ReturnsSession()
+    public void Save_ThenLoad_ReturnsSameSession()
     {
         var store = new InMemoryCredentialStore();
-        var s = new StoredSession("SESS-1", "ACC-1", "Zezima");
+        var s = MakeSession();
         store.Save(s);
         Assert.Equal(s, store.Load());
     }
@@ -26,7 +30,7 @@ public class InMemoryCredentialStoreTests
     public void Clear_RemovesSession()
     {
         var store = new InMemoryCredentialStore();
-        store.Save(new StoredSession("SESS-1", "ACC-1", "Zezima"));
+        store.Save(MakeSession());
         store.Clear();
         Assert.Null(store.Load());
     }
