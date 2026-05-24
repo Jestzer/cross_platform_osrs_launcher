@@ -1,0 +1,69 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="OsrsLauncher.Harness.Views.HomeView"
+             Background="{DynamicResource MainBackgroundBrush}">
+    <Panel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <!-- Centered card -->
+        <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="{DynamicResource SidebarBackgroundBrush}"
+                BorderBrush="{DynamicResource SeparatorBrush}"
+                BorderThickness="1"
+                CornerRadius="6"
+                Padding="24"
+                MinWidth="320">
+            <StackPanel Spacing="16">
+                <!-- Character / login heading -->
+                <TextBlock x:Name="StatusLabel"
+                           FontSize="22"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           MaxWidth="360" />
+
+                <!-- Primary action: Play or Log in -->
+                <Button x:Name="PrimaryButton"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        MinWidth="120"
+                        Padding="24,10"
+                        FontSize="15"
+                        FontWeight="SemiBold"
+                        Background="{DynamicResource AccentBrush}"
+                        Foreground="{DynamicResource AccentForegroundBrush}"
+                        Click="OnPrimaryButtonClick" />
+
+                <!-- Switch character (secondary) -->
+                <Button x:Name="SwitchCharacterButton"
+                        HorizontalAlignment="Center"
+                        MinWidth="120"
+                        Padding="12,6"
+                        Background="Transparent"
+                        Foreground="{DynamicResource TextSecondaryBrush}"
+                        IsVisible="False"
+                        Click="OnSwitchCharacterButtonClick">Switch character</Button>
+
+                <!-- Switch account (secondary) -->
+                <Button x:Name="SwitchButton"
+                        HorizontalAlignment="Center"
+                        MinWidth="120"
+                        Padding="12,6"
+                        Background="Transparent"
+                        Foreground="{DynamicResource TextSecondaryBrush}"
+                        IsVisible="False"
+                        Click="OnSwitchButtonClick">Switch account</Button>
+
+                <!-- Inline launch / error status -->
+                <TextBlock x:Name="InlineStatus"
+                           FontSize="13"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           MaxWidth="360"
+                           IsVisible="False" />
+            </StackPanel>
+        </Border>
+    </Panel>
+</UserControl>

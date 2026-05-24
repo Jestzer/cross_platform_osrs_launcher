@@ -1,0 +1,26 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Color x:Key="MainBackground">#FF25201A</Color>      <!-- dark stone-brown -->
+  <Color x:Key="SidebarBackground">#FF352E25</Color>   <!-- card -->
+  <Color x:Key="SidebarBlock">#FF3F362B</Color>        <!-- picker rows -->
+  <Color x:Key="AccentColor">#FFCBA135</Color>         <!-- antique gold -->
+  <Color x:Key="AccentColorSecondary">#FFDDB94E</Color><!-- lighter gold -->
+  <Color x:Key="AccentForeground">#FF241E14</Color>    <!-- dark text on gold -->
+  <Color x:Key="TextPrimary">#FFECE3D0</Color>         <!-- parchment -->
+  <Color x:Key="TextSecondary">#FFB3A78D</Color>       <!-- muted parchment -->
+  <Color x:Key="Separator">#FF4A4136</Color>
+  <Color x:Key="SuccessColor">#FF6FCF54</Color>
+  <Color x:Key="ErrorColor">#FFD9534F</Color>
+
+  <SolidColorBrush x:Key="MainBackgroundBrush" Color="{StaticResource MainBackground}" />
+  <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="{StaticResource SidebarBackground}" />
+  <SolidColorBrush x:Key="SidebarBlockBrush" Color="{StaticResource SidebarBlock}" />
+  <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
+  <SolidColorBrush x:Key="AccentBrushSecondary" Color="{StaticResource AccentColorSecondary}" />
+  <SolidColorBrush x:Key="AccentForegroundBrush" Color="{StaticResource AccentForeground}" />
+  <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimary}" />
+  <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondary}" />
+  <SolidColorBrush x:Key="SeparatorBrush" Color="{StaticResource Separator}" />
+  <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}" />
+  <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}" />
+</ResourceDictionary>

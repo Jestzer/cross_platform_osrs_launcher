@@ -1,10 +1,13 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:wv="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.WebView"
         x:Class="OsrsLauncher.Harness.MainWindow"
-        Title="Jagex Login — OSRS Launcher Harness"
-        Width="1000" Height="750">
-    <wv:NativeWebView x:Name="WebView"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch" />
+        Title="RuneLite Jagex Launcher"
+        Width="440" Height="560"
+        CanResize="True"
+        Background="{DynamicResource MainBackgroundBrush}">
+    <ContentControl x:Name="Root"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch" />
 </Window>

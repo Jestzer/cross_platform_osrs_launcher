@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:wv="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.WebView"
+             x:Class="OsrsLauncher.Harness.Views.LoginView">
+    <Grid RowDefinitions="*,Auto">
+        <!-- WebView fills available space -->
+        <wv:NativeWebView x:Name="WebView"
+                          Grid.Row="0"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch" />
+
+        <!-- Thin status bar at the bottom -->
+        <Border Grid.Row="1"
+                Background="{DynamicResource SidebarBackgroundBrush}"
+                BorderBrush="{DynamicResource SeparatorBrush}"
+                BorderThickness="0,1,0,0"
+                Padding="12,6">
+            <TextBlock x:Name="StatusLabel"
+                       HorizontalAlignment="Center"
+                       FontSize="13"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       IsVisible="False" />
+        </Border>
+    </Grid>
+</UserControl>
