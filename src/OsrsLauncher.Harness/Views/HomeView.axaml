@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="OsrsLauncher.Harness.Views.HomeView">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
+        <TextBlock x:Name="StatusLabel"
+                   FontSize="18"
+                   HorizontalAlignment="Center"
+                   TextWrapping="Wrap"
+                   MaxWidth="400" />
+        <Button x:Name="PrimaryButton"
+                HorizontalAlignment="Center"
+                MinWidth="120"
+                Click="OnPrimaryButtonClick" />
+        <Button x:Name="SwitchButton"
+                HorizontalAlignment="Center"
+                MinWidth="120"
+                IsVisible="False"
+                Click="OnSwitchButtonClick">Switch account</Button>
+        <TextBlock x:Name="InlineStatus"
+                   FontSize="13"
+                   Foreground="Gray"
+                   HorizontalAlignment="Center"
+                   TextWrapping="Wrap"
+                   MaxWidth="400"
+                   IsVisible="False" />
+    </StackPanel>
+</UserControl>

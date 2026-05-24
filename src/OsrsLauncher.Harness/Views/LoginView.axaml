@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:wv="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.WebView"
+             x:Class="OsrsLauncher.Harness.Views.LoginView">
+    <Grid>
+        <wv:NativeWebView x:Name="WebView"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch" />
+        <TextBlock x:Name="StatusLabel"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,0,16"
+                   FontSize="13"
+                   Foreground="Gray"
+                   IsVisible="False" />
+    </Grid>
+</UserControl>

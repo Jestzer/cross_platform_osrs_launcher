@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:session="clr-namespace:OsrsLauncher.Core.Session;assembly=OsrsLauncher.Core"
+             x:Class="OsrsLauncher.Harness.Views.CharacterPickerView">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12">
+        <TextBlock Text="Choose a character:"
+                   FontSize="18"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,8" />
+        <ItemsControl x:Name="CharacterList">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="session:JagexCharacter">
+                    <Button Content="{Binding DisplayName}"
+                            HorizontalAlignment="Center"
+                            MinWidth="160"
+                            Margin="0,4"
+                            Tag="{Binding}"
+                            Click="OnCharacterButtonClick" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</UserControl>
