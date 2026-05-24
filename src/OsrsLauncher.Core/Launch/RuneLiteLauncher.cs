@@ -24,13 +24,12 @@ public sealed class RuneLiteLauncher
         _fileExists = fileExists ?? File.Exists;
     }
 
+    // Jagex-account login path: RuneLite expects exactly these three vars. JX_ACCESS_TOKEN/JX_REFRESH_TOKEN belong to the separate legacy-RS path (see docs/reference/jagex-flow.md §5).
     public static IReadOnlyDictionary<string, string> BuildEnvironment(RuneLiteLaunchInputs input) => new Dictionary<string, string>
     {
         ["JX_SESSION_ID"] = input.Session.SessionId,
         ["JX_CHARACTER_ID"] = input.Character.AccountId,
         ["JX_DISPLAY_NAME"] = input.Character.DisplayName ?? "",
-        ["JX_ACCESS_TOKEN"] = input.Tokens.AccessToken,
-        ["JX_REFRESH_TOKEN"] = input.Tokens.RefreshToken ?? "",
     };
 
     public string ResolveExecutablePath(string? overridePath)

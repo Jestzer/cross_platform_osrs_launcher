@@ -32,8 +32,8 @@ public class RuneLiteLauncherTests
         Assert.Equal("SESS-1", env["JX_SESSION_ID"]);
         Assert.Equal("ACC-1", env["JX_CHARACTER_ID"]);
         Assert.Equal("Zezima", env["JX_DISPLAY_NAME"]);
-        Assert.Equal("AT", env["JX_ACCESS_TOKEN"]);
-        Assert.Equal("RT", env["JX_REFRESH_TOKEN"]);
+        Assert.False(env.ContainsKey("JX_ACCESS_TOKEN"));
+        Assert.False(env.ContainsKey("JX_REFRESH_TOKEN"));
     }
 
     [Fact]
