@@ -1,4 +1,4 @@
-# Cross Platform OSRS Launcher
+# Cross-Platform OSRS Launcher
 
 A native desktop launcher that logs into a Jagex account and starts
 RuneLite with the session credentials it needs, without the official Jagex
