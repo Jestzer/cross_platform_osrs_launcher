@@ -74,4 +74,30 @@ public class RuneLiteLauncherTests
 
         Assert.Equal("", env["JX_DISPLAY_NAME"]);
     }
+
+    [Fact]
+    public void BuildJagexEnvironment_MapsThreeVars()
+    {
+        var env = RuneLiteLauncher.BuildJagexEnvironment(
+            new GameSession("SESS-1"), new JagexCharacter("ACC-1", "Zezima"));
+
+        Assert.Equal("SESS-1", env["JX_SESSION_ID"]);
+        Assert.Equal("ACC-1", env["JX_CHARACTER_ID"]);
+        Assert.Equal("Zezima", env["JX_DISPLAY_NAME"]);
+        Assert.False(env.ContainsKey("JX_ACCESS_TOKEN"));
+    }
+
+    [Fact]
+    public void LaunchJagexSession_StartsResolvedPathWithEnv()
+    {
+        var runner = new FakeProcessRunner();
+        var launcher = new RuneLiteLauncher(runner, fileExists: _ => true);
+
+        launcher.LaunchJagexSession(
+            new GameSession("SESS-9"), new JagexCharacter("ACC-9", "Woox"), overridePath: "/custom/RuneLite");
+
+        Assert.Equal("/custom/RuneLite", runner.StartedPath);
+        Assert.Equal("SESS-9", runner.Env!["JX_SESSION_ID"]);
+        Assert.Equal("ACC-9", runner.Env!["JX_CHARACTER_ID"]);
+    }
 }
