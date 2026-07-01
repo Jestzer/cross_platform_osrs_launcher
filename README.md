@@ -6,9 +6,9 @@ Launcher. Cross-platform compatibility and simplicity should allow for (hopefull
 
 ## Why
 
-Jagex has failed to offer support for Apple Silicon (M-series CPUs) and Linux users. Bolt (I believe) meets the needs of Linux users, but it currently has no Mac support. With Rosetta 2 being removed soon by Apple, Apple Silicon users are potentionally left in the dust and have no easy way of playing OSRS with a Jagex account, until now!
+Jagex, at the time of writing this, has failed to offer support for Apple Silicon (M-series CPUs). Bolt meets the needs of Linux users, but it currently has no Mac support. With Rosetta 2 being removed soon by Apple, Apple Silicon users are potentionally left in the dust and have no easy way of playing OSRS with a Jagex account, until now!
 
-This is built with Avalonia, so it is cross-platform-capable. Apple Silicon is the only build-and-test target for now, though.
+This is built with Avalonia, so it is cross-platform-capable, in case you want to build it for another platform. Apple Silicon is the only build-and-test target for now, though. Since better options exist for other platforms, I imagine those will be choosen instead of this.
 
 ## Features
 
@@ -35,7 +35,7 @@ bash scripts/package-macos.sh        # builds dist/OSRS Launcher.app
 dotnet run --project src/OsrsLauncher.Harness
 ```
 
-Requires the **.NET 8 SDK** and macOS on Apple Silicon.
+Requires the **.NET 8 Runtime**
 
 ## Usage
 
@@ -73,8 +73,4 @@ This builds on community work that reverse-engineered the Jagex login flow:
 
 ## Disclaimer
 
-This is completely unofficial and not affiliated with or endorsed by Jagex or RuneLite in any way shape or form.
-
-## License
-
-Licensed under the [GNU General Public License v3.0](LICENSE).
+This program is completely unofficial and not affiliated with or endorsed by Jagex or RuneLite in any way shape or form.
